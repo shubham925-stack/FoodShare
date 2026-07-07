@@ -1,0 +1,58 @@
+const mongoose = require("mongoose")
+const userSchema = new mongoose.Schema(
+    {
+        name:{
+            type:String,
+            required:true,
+            trime:true,
+        },
+        email:{
+            type:String,
+            required:true,
+            trime:true,
+            unique:true,
+            lowercase:true,
+        },
+        phone:{
+            required:true,
+            trime:true,
+            type:String,
+            unique:true,
+        },
+        password:{
+            required:true,
+            type:String,
+        },
+        role:{
+            type:String,
+            required:true,
+            enum:[
+                "Restaurant","NGO","Volunteer","Admin"
+            ],
+        },
+        accountStatus:{
+            type:String,
+            enum:["Active","Suspended","Rejected"],
+            default:"Active",
+        },
+        verificationStatus:{
+            type:String,
+            enum:["Pending","Verified","Rejected","Not Required"],
+            default:"Pending",
+        },
+        profileStatus:{
+            type:String,
+            enum:["Incomplete","Completed"],
+            default:"Incomplete",
+        },
+        lastLogin:{
+            type:Date,
+            default:null,
+        },
+    },
+    {
+        timestamps:true,
+    }
+);
+
+module.exports=mongoose.model("User",userSchema);
