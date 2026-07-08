@@ -4,6 +4,10 @@ import Login from "./pages/Login";
 import RestaurantDashboard from "./pages/RestaurantDashboard";
 import RestaurantProfile from "./pages/RestaurantProfile";
 import UpdateRestaurantProfile from "./pages/UpdateRestaurantProfile";
+import CreateDonation from "./pages/CreateDonation";
+import MyDonations from "./pages/MyDonations";
+import UpdateDonation from "./pages/UpdateDonations";
+import NGOProfile from './pages/NGOProfile'
 function App() {
   return (
     <Routes>
@@ -24,6 +28,21 @@ function App() {
     <Route
     path="/update-restaurant-profile"
     element={<UpdateRestaurantProfile />}
+    />
+    <Route
+    path="/create-donation"
+    element={<CreateDonation/>}
+    />
+    <Route path="/my-donations" 
+    element={<MyDonations/>} 
+    />
+    <Route
+    path="/update-donation/:id"
+    element={<UpdateDonation />}
+    />
+    <Route
+    path="/ngo-profile"
+    element={<NGOProfile />}
     />
    </Routes>
   );

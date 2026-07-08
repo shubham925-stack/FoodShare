@@ -20,7 +20,7 @@ function RestaurantDashboard() {
             </div>
             <div className="dashboard-cards">
                 <Link
-                    // to="/create-donation"
+                    to="/create-donation"
                     className="dashboard-card"
                 >
                     <h2>🍱</h2>
@@ -30,7 +30,7 @@ function RestaurantDashboard() {
                     </p>
                 </Link>
                 <Link
-                    // to="/my-donations"
+                    to="/my-donations"
                     className="dashboard-card"
                 >
                     <h2>📋</h2>

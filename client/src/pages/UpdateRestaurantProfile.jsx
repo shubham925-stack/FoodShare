@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios"
 import "../styles/RestaurantProfile.css"
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 // import verificationDocumentSchema from "../../../server/models/schemas/VerificationDocument";
 
 function UpdateRestaurantProfile() {
@@ -16,6 +17,7 @@ function UpdateRestaurantProfile() {
     const [documentType, setDocumentType] = useState("Government ID");
     const [documentNumber, setDocumentNumber] = useState("");
     const [acceptingDonations, setAcceptingDonations] = useState(true)
+    const navigate = useNavigate()
     // get restaurant details
     const fetchRestaurantProfile = async () => {
         try {
@@ -44,10 +46,21 @@ function UpdateRestaurantProfile() {
             setDocumentNumber(
                 profile.verificationDocuments[0].documentNumber
             );
-            setAcceptingDonations(profile.acceptingDonations);
         }
         catch (error) {
             console.log(error);
+
+            if(error.response?.status===401){
+                localStorage.removeItem("token");
+                localStorage.removeItem("user");
+                navigate("/login")
+            }
+            else if(error.response){
+                alert(error.response.data.message)
+            }
+            else{
+                alert(error.message)
+            }
         }
     }
     useEffect(() => {
@@ -93,6 +106,7 @@ function UpdateRestaurantProfile() {
             )
             console.log(response.data);
             alert("Restaurant profile updated successfully")
+            navigate("/restaurant-dashboard")
         } catch (error) {
             console.log(error)
             if (error.response) {
