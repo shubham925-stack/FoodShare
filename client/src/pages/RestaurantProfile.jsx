@@ -1,7 +1,9 @@
 import { useState } from "react";
 import "../styles/RestaurantProfile.css"
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 function RestaurantProfile() {
+    const navigate=useNavigate()
     const [restaurantName, setRestaurantName] = useState("")
     const [restaurantType, setRestaurantType] = useState("Restaurant")
     const [addressLine, setAddressLine] = useState("")
@@ -60,6 +62,7 @@ function RestaurantProfile() {
             )
             console.log(response.data)
             alert("Restaurant profile created successfully")
+            navigate("/restaurant-dashboard")
         } catch(error){
             console.log(error)
             if(error.response){

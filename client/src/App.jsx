@@ -8,6 +8,10 @@ import CreateDonation from "./pages/CreateDonation";
 import MyDonations from "./pages/MyDonations";
 import UpdateDonation from "./pages/UpdateDonations";
 import NGOProfile from './pages/NGOProfile'
+import NGODashboard from "./pages/NGODashboard";
+import AvailableDonations from "./pages/AvailableDonations";
+import ClaimDonation from "./pages/ClaimDonation";
+import MyClaims from "./pages/MyClaims";
 function App() {
   return (
     <Routes>
@@ -43,6 +47,22 @@ function App() {
     <Route
     path="/ngo-profile"
     element={<NGOProfile />}
+    />
+    <Route
+    path="/ngo-dashboard"
+    element={<NGODashboard />}
+    />
+    <Route
+    path="/available-donations"
+    element={<AvailableDonations />}
+    />
+    <Route
+    path="/claim-donation/:id"
+    element={<ClaimDonation />}
+    />
+    <Route
+    path="/my-claims"
+    element={<MyClaims />}
     />
    </Routes>
   );

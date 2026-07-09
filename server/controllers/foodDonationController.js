@@ -173,112 +173,117 @@ const deleteFoodDonation = async (req, res) => {
     }
 }
 //updating claims
-const claimFoodDonation = async (req, res) => {
-    try {
-        const { id } = req.params
-        const { itemId, quantity } = req.body;
-        if(!quantity||quantity<=0){
-            return res.status(400).json({
-                message:"quantity must be greater than0"
-            })
-        }
-        const donation = await FoodDonation.findById(id);
-        if (!donation) {
-            return res.status(404).json({
-                message: "Food donation not found"
-            })
-        }
+// const claimFoodDonation = async (req, res) => {
+//     try {
+//         const { id } = req.params
+//         const { itemId, quantity } = req.body;
+//         if(!quantity||quantity<=0){
+//             return res.status(400).json({
+//                 message:"quantity must be greater than0"
+//             })
+//         }
+//         const donation = await FoodDonation.findById(id);
+//         if (!donation) {
+//             return res.status(404).json({
+//                 message: "Food donation not found"
+//             })
+//         }
 
-        //NGO search
-        const userId = req.user.id
-        const ngo = await NGOProfile.findOne({userId});
-        if (!ngo) {
-            return res.status(404).json({
-                message: "NGO not found"
-            })
-        }
-        //Food item search
-        const foodItem = donation.foodItems.id(itemId)
-        if (!foodItem) {
-            return res.status(404).json({
-                message: "Food item not found"
-            })
-        }
-        const availableQuantity =
-            foodItem.totalQuantity - foodItem.claimedQuantity
+//         //NGO search
+//         const userId = req.user.id
+//         const ngo = await NGOProfile.findOne({userId});
+//         if (!ngo) {
+//             return res.status(404).json({
+//                 message: "NGO not found"
+//             })
+//         }
+//         //Food item search
+//         const foodItem = donation.foodItems.id(itemId)
+//         if (!foodItem) {
+//             return res.status(404).json({
+//                 message: "Food item not found"
+//             })
+//         }
+//         const availableQuantity =
+//             foodItem.totalQuantity - foodItem.claimedQuantity
 
-        if (quantity > availableQuantity) {
-            return res.status(400).json({
-                message: "Not enough food available"
-            })
-        }
-        //updating claimed history
-        foodItem.claimedQuantity += quantity
+//         if (quantity > availableQuantity) {
+//             return res.status(400).json({
+//                 message: "Not enough food available"
+//             })
+//         }
+//         //updating claimed history
+//         foodItem.claimedQuantity += quantity
 
-        //save claim history
+//         //save claim history
 
-        await DonationClaim.create({
-            donationId: donation._id,
-            ngoId:ngo._id,
-            itemId: foodItem.id,
-            quantity
-        })
-        const allClaimed=donation.foodItems.every(
-            item=>item.claimedQuantity===item.totalQuantity
-        )
-        const partiallyClaimed=donation.foodItems.some(
-            item=>item.claimedQuantity>0
-        )
-        if(allClaimed){
-            donation.donationStatus="Fully Claimed"
-        }
-        else if(partiallyClaimed){
-            donation.donationStatus="Partially Claimed"
-        }
-        else{
-            donation.donationStatus="Available"
-        }
-        await donation.save()
+//         await DonationClaim.create({
+//             donationId: donation._id,
+//             restaurantId :donation.restaurantId,
+//             ngoId: ngo._id,
+//             claimedItems:[
+//                 {
+//                     itemId:foodItem._id,
+//                     quantityClaimed:quantity
+//                 }
+//             ]
+//         })
+//         const allClaimed=donation.foodItems.every(
+//             item=>item.claimedQuantity===item.totalQuantity
+//         )
+//         const partiallyClaimed=donation.foodItems.some(
+//             item=>item.claimedQuantity>0
+//         )
+//         if(allClaimed){
+//             donation.donationStatus="Fully Claimed"
+//         }
+//         else if(partiallyClaimed){
+//             donation.donationStatus="Partially Claimed"
+//         }
+//         else{
+//             donation.donationStatus="Available"
+//         }
+//         await donation.save()
 
-        res.status(200).json({
-            message: "Food claimed successfully",
-            donation
-        })
-    } catch (error) {
-        res.status(500).json({
-            message: "internal server error",
-            error: error.message
-        })
-    }
-}
+//         res.status(200).json({
+//             message: "Food claimed successfully",
+//             donation
+//         })
+//     } catch (error) {
+//         res.status(500).json({
+//             message: "internal server error",
+//             error: error.message
+//         })
+//     }
+// }
 
-const getNGODonations = async (req, res) => {
-    try {
-        const userId = req.user.id;
-        const ngo = await NGOProfile.findOne({userId})
-        if(!ngo){
-            return res.status(404).json({
-                message:"NGO profile not found"
-            })
-        }
-        const claims = await DonationClaim.find({ ngoId:ngo._id })
-            .populate({
-                path: "donationId",
-                populate: {
-                    path: "restaurantId"
-                }
-            });
-        res.status(200).json({
-            message: "NGO donations fetched successfully",
-            claims
-        });
-    } catch (error) {
-        res.status(500).json({
-            message: "Internal server error",
-            error: error.message
-        });
-    }
-};
+// const getNGODonations = async (req, res) => {
+//     try {
+//         const userId = req.user.id;
+//         const ngo = await NGOProfile.findOne({userId})
+//         if(!ngo){
+//             return res.status(404).json({
+//                 message:"NGO profile not found"
+//             })
+//         }
+//         const claims = await DonationClaim.find({ ngoId:ngo._id })
+//             .populate({
+//                 path: "donationId",
+//                 populate: {
+//                     path: "restaurantId"
+//                 }
+//             });
+//         res.status(200).json({
+//             message: "NGO donations fetched successfully",
+//             claims
+//         });
+//     } catch (error) {
+//         res.status(500).json({
+//             message: "Internal server error",
+//             error: error.message
+//         });
+//     }
+// };
 
 module.exports = {
     createFoodDonation,
@@ -287,6 +292,6 @@ module.exports = {
     getFoodDonationById,
     updateFoodDonation,
     deleteFoodDonation,
-    claimFoodDonation,
-    getNGODonations
+    // claimFoodDonation,
+    // getNGODonations
 };

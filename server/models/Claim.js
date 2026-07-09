@@ -8,10 +8,16 @@ const claimSchema = new mongoose.Schema(
             ref:"FoodDonation",
             required:true,
         },
-        claimedBy:{
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"User",
-            required:true,
+        restaurantId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "RestaurantProfile",
+            required: true,
+        },
+
+        ngoId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "NGOProfile",
+            required: true,
         },
         claimedItems:{
             type:[claimedItemSchema],

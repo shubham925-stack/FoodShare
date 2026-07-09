@@ -1,0 +1,129 @@
+.donations-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.donations-container h1 {
+    text-align: center;
+    color: #2e7d32;
+    margin-bottom: 8px;
+    font-size: 2.2rem;
+}
+
+.donations-container p {
+    text-align: center;
+    color: #666;
+}
+
+.donation-card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    padding: 24px;
+    margin: 25px 0;
+    transition: 0.3s ease;
+    border-left: 6px solid #2e7d32;
+}
+
+.donation-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+}
+
+.donation-card h2 {
+    color: #2e7d32;
+    margin-bottom: 18px;
+    font-size: 1.6rem;
+}
+
+.donation-card h3 {
+    color: #444;
+    margin-bottom: 8px;
+}
+
+.food-item {
+    background: #f8f8f8;
+    border-radius: 10px;
+    padding: 14px;
+    margin: 15px 0;
+}
+
+.food-item p {
+    text-align: left;
+    margin: 6px 0;
+    color: #555;
+}
+
+.donation-card p {
+    text-align: left;
+    margin: 8px 0;
+    color: #555;
+    line-height: 1.5;
+}
+
+.donation-card strong {
+    color: #222;
+}
+
+.claim-btn {
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: #2e7d32;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.claim-btn:hover {
+    background: #256428;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.available {
+    background: #d4edda;
+    color: #155724;
+}
+
+.partial {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.empty-state {
+    margin-top: 80px;
+    text-align: center;
+    font-size: 18px;
+    color: #777;
+}
+
+@media (max-width: 768px) {
+    .donations-container {
+        padding: 15px;
+    }
+
+    .donation-card {
+        padding: 18px;
+    }
+
+    .donation-card h2 {
+        font-size: 1.3rem;
+    }
+
+    .claim-btn {
+        font-size: 15px;
+    }
+}

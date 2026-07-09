@@ -58,8 +58,8 @@ function NGOProfile(){
                 }              
             )
             console.log(response.data)
-            alert("Restaurant profile is created")
-            // navigate("/ngo-dashboard")
+            alert("NGO profile is created")
+            navigate("/ngo-dashboard")
         }catch (error) {
             console.log(error)
             if (error.response?.status === 401) {

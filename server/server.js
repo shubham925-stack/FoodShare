@@ -9,6 +9,7 @@ const foodDonationRoutes=require("./routes/foodDonationRoutes")
 const ngoProfileRoutes=require("./routes/ngoProfileRoutes")
 const adminRoutes=require("./routes/adminRoutes")
 const aiRoutes = require("./routes/aiRoutes")
+const claimRoutes = require("./routes/claimRoutes");
 // const volunteerProfileRoutes=require("./routes/volunteerProfileRoutes")
 
 
@@ -22,6 +23,7 @@ app.use("/api/food-donations",foodDonationRoutes)
 app.use("/api/ngo-profiles",ngoProfileRoutes)
 app.use("/api/admin",adminRoutes)
 app.use("/api/ai",aiRoutes)
+app.use("/api/claims", claimRoutes);
 // app.use("/api/volunteer-profiles",volunteerProfileRoutes)
 const PORT = process.env.PORT||3000;
 

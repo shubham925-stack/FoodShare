@@ -16,9 +16,9 @@ const {
 router.post("/",authMiddleware,roleMiddleware("Restaurant"),createFoodDonation)
 router.get("/",getAllFoodDonations)
 router.get("/my-donations",authMiddleware,roleMiddleware("Restaurant"),getRestaurantDonations)
-router.get("/ngo/my-donations",authMiddleware,roleMiddleware("NGO"),getNGODonations)
+// router.get("/ngo/my-donations",authMiddleware,roleMiddleware("NGO"),getNGODonations)
 router.get("/:donationId",getFoodDonationById)
 router.put("/:id",authMiddleware,roleMiddleware("Restaurant"),updateFoodDonation)
 router.delete("/:id",authMiddleware,roleMiddleware("Restaurant"),deleteFoodDonation)
-router.patch("/:id/claim",authMiddleware,roleMiddleware("NGO"),claimFoodDonation)
+// router.patch("/:id/claim",authMiddleware,roleMiddleware("NGO"),claimFoodDonation)
 module.exports=router
