@@ -39,7 +39,7 @@ function NGODashboard() {
                     <p>View your claimed donations</p>
                 </Link>
                 <Link
-                    // to="/update-ngo-profile"
+                    to="/update-ngo-profile"
                     className="dashboard-card"
                 >
                     <h2>👤</h2>

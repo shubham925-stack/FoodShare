@@ -89,6 +89,7 @@ const updateNGOProfile=async(req,res)=>{
             message:"NGO profile updated successfully",ngoProfile
         })
     }catch(error){
+        console.log(error)
         res.status(500).json({
             message:"internal server error",
             error:error.message
