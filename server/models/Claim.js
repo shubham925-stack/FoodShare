@@ -36,8 +36,6 @@ const claimSchema = new mongoose.Schema(
                 "Accepted",
                 "Rejected",
                 "Picked Up",
-                "Completed",
-                "Cancelled",
             ],
             default:"Pending",
         },

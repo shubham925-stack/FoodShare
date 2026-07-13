@@ -7,6 +7,12 @@ function CreateDonation() {
 
     const navigate = useNavigate();
 
+    const [generatingDescription, setGeneratingDescription] = useState(false);
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [imagePreview, setImagePreview] = useState("");
+    const [imageUrl, setImageUrl] = useState("");
+    const [publicId, setPublicId] = useState("");
+    const [uploading, setUploading] = useState(false);
     const [foodName, setFoodName] = useState("");
     const [category, setCategory] = useState("");
     const [foodType, setFoodType] = useState("Veg");
@@ -17,7 +23,88 @@ function CreateDonation() {
     const [pickupEndTime, setPickupEndTime] = useState("");
     const [expiryTime, setExpiryTime] = useState("");
     const [pickupInstructions, setPickupInstructions] = useState("");
+    
+    const handleGenerateDescription = async()=>{
+        if(!foodName){
+            alert("please enter the food name");
+            return;
+        }
 
+        if(!imageUrl){
+            alert("please upload an image first");
+            return;
+        }
+
+        try{
+            setGeneratingDescription(true);
+            const token = localStorage.getItem("token");
+            console.log({
+                foodName,
+                imageURL:imageUrl
+            })
+            const response = await axios.post(
+            "http://localhost:3000/api/ai/description",
+            {
+                foodName,
+                imageURL:imageUrl,
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+               }
+            }
+            )
+            setDescription(response.data.description)
+        }catch (error) {
+        console.log(error);
+        alert(
+            error.response?.data?.message ||
+            error.message
+        );
+    } finally {
+        setGeneratingDescription(false);
+    }
+    }
+    const handleImageChange = (e)=>{
+        const file =e.target.files[0];
+
+        if(!file ) return ;
+
+        setSelectedImage(file);
+        setImagePreview(URL.createObjectURL(file))
+    }
+    const handleUploadImage = async()=>{
+        if (!selectedImage){
+            alert("Please select an image first");
+            return
+        }
+        try{
+            setUploading(true);
+
+            const token = localStorage.getItem("token");
+            const formData = new FormData();
+            formData.append("image",selectedImage);
+
+            const response = await axios.post(
+                "http://localhost:3000/api/upload/food-image",
+                formData,
+                {
+                    headers:{
+                        Authorization:`Bearer ${token}`
+                    },
+                }
+            );
+            setImageUrl(response.data.imageUrl);
+            setPublicId(response.data.publicId);
+
+            alert("Image uploaded successfully!");
+        }catch (error) {
+        console.log(error);
+        alert(error.response?.data?.message || error.message);
+    } finally {
+        setUploading(false);
+    }
+    }
     const handleCreateDonation = async()=>{
         try{
             const token = localStorage.getItem("token")
@@ -31,7 +118,12 @@ function CreateDonation() {
                         foodType,
                         totalQuantity: Number(totalQuantity),
                         unit,
-                        description
+                        description,
+
+                        foodImage:{
+                            imageUrl,
+                            publicId
+                        }
                     }
                     ],
                     pickupStartTime,
@@ -149,6 +241,47 @@ function CreateDonation() {
                 onChange={(e) => setDescription(e.target.value)}
                 rows={4}
             />
+            <div className="image-upload-section">
+                <label>Food Image</label>
+
+                        <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleImageChange}
+                        />
+                        {imagePreview && (
+                            <div className="image-preview">
+                                <img
+                                    src={imagePreview}
+                                    alt="Food Preview"
+                                    width="250"
+                                />
+                            </div>
+                        )}
+                        <button
+                            type="button"
+                            onClick={handleUploadImage}
+                            disabled={uploading}
+                        >
+                            {uploading ? "Uploading..." : "Upload Image"}
+                        </button>
+                        {imageUrl && (
+                            <p style={{ color: "green" }}>
+                                ✅ Image uploaded successfully!
+                            </p>
+                        )}
+                <button
+                    type="button"
+                    className="generate-btn"
+                    onClick={handleGenerateDescription}
+                    disabled={!imageUrl || generatingDescription}
+                >
+                    {generatingDescription
+                        ? "Generating..."
+                        : "🤖 Generate Description"}
+                </button>
+                    </div>
+
             <label>Pickup Start Time</label>
             <input
                 type="datetime-local"

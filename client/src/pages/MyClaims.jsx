@@ -35,66 +35,158 @@ function MyClaims() {
         fetchClaims()
     }, [])
     return (
-        <div className="claims-container">
-            <h1>My Claims</h1>
-            {claims.length === 0 ? (
-                <p>No claims found.</p>
-            ) : (
-                claims.map((claim) => (
-                    <div
-                        className="claim-card"
-                        key={claim._id}
-                    >
-                        <h2>
-                            {claim.donationId?.restaurantId?.restaurantName}
-                        </h2>
-                        {claim.claimedItems.map((claimedItem) => {
-                            const foodItem =
-                                claim.donationId?.foodItems?.find(
-                                    (item) =>
-                                        item._id.toString() ===
-                                        claimedItem.itemId.toString()
-                                );
-                            return (
-                                <div
-                                    className="claimed-food"
-                                    key={claimedItem.itemId}
-                                >
-                                    <p>
-                                        <strong>Food Item:</strong>{" "}
-                                        {foodItem?.foodName || "Not Found"}
-                                    </p>
-                                    <p>
-                                        <strong>Category:</strong>{" "}
-                                        {foodItem?.category || "-"}
-                                    </p>
-                                    <p>
-                                        <strong>Food Type:</strong>{" "}
-                                        {foodItem?.foodType || "-"}
-                                    </p>
-                                    <p>
-                                        <strong>Quantity Requested:</strong>{" "}
-                                        {claimedItem.quantityClaimed}{" "}
-                                        {foodItem?.unit}
-                                    </p>
-                                </div>
+    <div className="claims-container">
+        <h1>My Claims</h1>
+        {claims.length === 0 ? (
+            <p>No claims found.</p>
+        ) : (
+            claims.map((claim) => (
+                <div
+                    className="claim-card"
+                    key={claim._id}
+                >
+                    <h2>
+                        {claim.donationId?.restaurantId?.restaurantName}
+                    </h2>
+                    {claim.claimedItems.map((claimedItem) => {
+                        const foodItem =
+                            claim.donationId?.foodItems?.find(
+                                (item) =>
+                                    item._id.toString() ===
+                                    claimedItem.itemId.toString()
                             );
-                        })}
-                        <p>
-                            <strong>Status:</strong>{" "}
+                        return (
+                            <div
+                                className="claimed-food"
+                                key={claimedItem.itemId}
+                            >
+                                <p>
+                                    <strong>Food Item:</strong>{" "}
+                                    {foodItem?.foodName}
+                                </p>
+                                <p>
+                                    <strong>Category:</strong>{" "}
+                                    {foodItem?.category}
+                                </p>
+                                <p>
+                                    <strong>Food Type:</strong>{" "}
+                                    {foodItem?.foodType}
+                                </p>
+                                <p>
+                                    <strong>Quantity Requested:</strong>{" "}
+                                    {claimedItem.quantityClaimed}{" "}
+                                    {foodItem?.unit}
+                                </p>
+                            </div>
+                        );
+                    })}
+                    <p>
+                        <strong>Status:</strong>{" "}
+                        <span
+                            className={`status ${claim.claimStatus
+                                .toLowerCase()
+                                .replace(" ", "")}`}
+                        >
                             {claim.claimStatus}
-                        </p>
-                        <p>
-                            <strong>Requested On:</strong>{" "}
-                            {new Date(
-                                claim.createdAt
-                            ).toLocaleString()}
-                        </p>
-                    </div>
-                ))
-            )}
-        </div>
-    );
+                        </span>
+                    </p>
+                    <p>
+                        <strong>Requested On:</strong>{" "}
+                        {new Date(
+                            claim.createdAt
+                        ).toLocaleString()}
+                    </p>
+                    {(claim.claimStatus === "Accepted" ||
+                        claim.claimStatus === "Picked Up") && (
+                        <>
+                            <hr />
+                            <h3>Restaurant Details</h3>
+                            <p>
+                                <strong>Restaurant:</strong>{" "}
+                                {
+                                    claim.donationId
+                                        ?.restaurantId
+                                        ?.restaurantName
+                                }
+                            </p>
+                            <p>
+                                <strong>Pickup Time:</strong>{" "}
+                                {new Date(
+                                    claim.donationId
+                                        ?.pickupStartTime
+                                ).toLocaleString()}
+                                {" - "}
+                                {new Date(
+                                    claim.donationId
+                                        ?.pickupEndTime
+                                ).toLocaleString()}
+                            </p>
+                            <p>
+                                <strong>Pickup Instructions:</strong>{" "}
+                                {
+                                    claim.donationId
+                                        ?.pickupInstructions
+                                }
+                            </p>
+                            <p>
+                                <strong>Restaurant Address:</strong>{" "}
+                                {
+                                    claim.donationId
+                                        ?.restaurantId
+                                        ?.address
+                                        ?.addressLine
+                                }
+                                ,{" "}
+                                {
+                                    claim.donationId
+                                        ?.restaurantId
+                                        ?.address
+                                        ?.area
+                                }
+                                ,{" "}
+                                {
+                                    claim.donationId
+                                        ?.restaurantId
+                                        ?.address
+                                        ?.city
+                                }
+                            </p>
+                            <p>
+                                <strong>Restaurant Contact:</strong>{" "}
+                                {
+                                    claim.donationId
+                                        ?.restaurantId
+                                        ?.contactPerson
+                                        ?.name || "Not Available"
+                                }
+                            </p>
+                            <p>
+                                <strong>Phone:</strong>{" "}
+                                {
+                                    claim.donationId
+                                        ?.restaurantId
+                                        ?.contactPerson
+                                        ?.phone || "Not Available"
+                                }
+                            </p>
+                        </>
+                    )}
+                    {claim.claimStatus === "Picked Up" && (
+                        <>
+                            <hr />
+                            <p>
+                                <strong>Picked Up On:</strong>{" "}
+                                {new Date(
+                                    claim.pickedUpAt
+                                ).toLocaleString()}
+                            </p>
+                        </>
+                    )}
+                </div>
+            ))
+        )}
+    </div>
+);
 }
 
 export default MyClaims

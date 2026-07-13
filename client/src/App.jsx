@@ -13,6 +13,7 @@ import AvailableDonations from "./pages/AvailableDonations";
 import ClaimDonation from "./pages/ClaimDonation";
 import MyClaims from "./pages/MyClaims";
 import UpdateNGOProfile from "./pages/UpdateNGOProfile";
+import ClaimRequests from "./pages/ClaimRequests"
 function App() {
   return (
     <Routes>
@@ -68,6 +69,10 @@ function App() {
     <Route
     path="/update-ngo-profile"
     element={<UpdateNGOProfile />}
+    />
+    <Route
+    path="/claim-requests"
+    element={<ClaimRequests />}
     />
    </Routes>
   );

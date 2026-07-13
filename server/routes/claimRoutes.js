@@ -10,6 +10,7 @@ const {
     getNGOClaims,
     acceptClaim,
     rejectClaim,
+    markAsPickedUp
 } = require("../controllers/claimController");
 router.post(
     "/:id",
@@ -40,6 +41,12 @@ router.patch(
     authMiddleware,
     roleMiddleware("Restaurant"),
     rejectClaim
+);
+router.patch(
+    "/:id/pickup",
+    authMiddleware,
+    roleMiddleware("Restaurant"),
+    markAsPickedUp
 );
 
 module.exports = router;

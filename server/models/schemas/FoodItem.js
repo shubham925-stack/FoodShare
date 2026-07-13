@@ -57,6 +57,16 @@ const foodItemSchema= new mongoose.Schema(
             type:String,
             trim:true,
             default:""
+        },
+        foodImage:{
+            imageUrl:{
+                type:String,
+                default:"",
+            },
+            publicId:{
+                type:String,
+                default:""
+            }
         }
     },
     // {

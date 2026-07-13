@@ -200,10 +200,41 @@ const rejectClaim = async (req, res) => {
     }
 };
 
+const markAsPickedUp = async(req,res)=>{
+    try{
+        const claim = await Claim.findById(req.params.id);
+
+        if(!claim){
+            return res.status(404).json({
+                message:"Claim not found"
+            })
+        }
+        if(claim.claimStatus !== "Accepted"){
+            return res.status(404).json({
+                message : "Only accepted claims can be marked as picked up"
+            })
+        }
+        claim.claimStatus="Picked Up"
+        claim.pickedUpAt = new Date();
+        await claim.save();
+        
+        return res.status(200).json({
+            message:"Donation marked as picked up",
+            claim
+        });
+    }catch(error){
+        res.status(500).json({
+            message : "Internal sever error",
+            error : error.message
+        })
+    }
+}
+
 module.exports = {
     createClaim,
     getRestaurantClaims,
     getNGOClaims,
     acceptClaim,
     rejectClaim,
+    markAsPickedUp
 };

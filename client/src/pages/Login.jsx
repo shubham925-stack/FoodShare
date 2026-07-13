@@ -56,7 +56,7 @@ function Login() {
                             }
                         }
                     );
-                    navigate("/restaurant-dashboard");
+                    navigate("/ngo-dashboard");
                 } catch (error){
                     console.log("Profile Check Error:", error.response);
                     if (error.response?.status === 404){

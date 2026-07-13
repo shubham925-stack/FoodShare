@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import "../styles/RestaurantDashboard.css";
+import { useNavigate } from "react-router-dom";
 function RestaurantDashboard() {
     const user = JSON.parse(localStorage.getItem("user"));
+    const navigate = useNavigate()
     return (
         <div className="dashboard-container">
             <div className="dashboard-header">
@@ -49,6 +51,13 @@ function RestaurantDashboard() {
                         Update restaurant details
                     </p>
                 </Link>
+                <div
+                    className="dashboard-card"
+                    onClick={() => navigate("/claim-requests")}
+                >
+                    <h2>📩 Claim Requests</h2>
+                    <p>Review NGO requests</p>
+                </div>
                 <Link
                     to="/login"
                     className="dashboard-card logout-card"

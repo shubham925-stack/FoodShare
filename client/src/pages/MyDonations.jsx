@@ -146,7 +146,11 @@ function MyDonations() {
                                     Delete
                                 </button>
                             </div>
+                                <button onClick={()=>navigate("/restaurant-dashboard")}>
+                                    Home
+                                </button>                        
                         </div>
+                        
                     ))
                 )
             }
