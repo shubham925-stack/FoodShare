@@ -223,8 +223,7 @@ function UpdateDonation() {
                 onClick={handleUpdateDonation}
             >
                 Update Donation
-            </button>
-            
+            </button> 
         </div>
     </div>        
     )

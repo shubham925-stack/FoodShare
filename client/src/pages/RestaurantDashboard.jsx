@@ -69,10 +69,6 @@ function RestaurantDashboard() {
                     </p>
                 </Link>
             </div>
-            <div className="recent-section">
-                <h2>Recent Donations</h2>
-                <p>No donations yet.</p>
-            </div>
         </div>
     );
 }

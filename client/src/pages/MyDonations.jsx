@@ -145,15 +145,18 @@ function MyDonations() {
                                 <button onClick={()=>handleDelete(donation._id)}>
                                     Delete
                                 </button>
-                            </div>
-                                <button onClick={()=>navigate("/restaurant-dashboard")}>
-                                    Home
-                                </button>                        
+                            </div>                    
                         </div>
                         
                     ))
                 )
             }
+            <div >
+                <button className="Home-button"
+                onClick={()=>navigate("/restaurant-dashboard")}>
+                     Home
+                 </button>    
+            </div>
         </div>
     );
 }

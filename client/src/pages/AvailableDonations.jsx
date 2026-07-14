@@ -92,6 +92,12 @@ function AvailableDonations(){
                     </div>
                 ))
             )}
+            <div >
+                <button className="Home-button"
+                onClick={()=>navigate("/ngo-dashboard")}>
+                     Home
+                 </button>    
+            </div>
         </div>
     )
 }

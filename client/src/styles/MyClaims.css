@@ -98,6 +98,14 @@
     margin-top: 50px;
 }
 
+.Home-button{
+    background-color: black;
+    color: white;            
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
 @media (max-width: 768px) {
 

@@ -204,7 +204,7 @@ function ClaimRequests(){
                             <button
                                 className="accept-btn"
                                 onClick={() =>
-                                    handleAccept(
+                                    acceptClaim(
                                         claim._id
                                     )
                                 }
@@ -215,7 +215,7 @@ function ClaimRequests(){
                             <button
                                 className="reject-btn"
                                 onClick={() =>
-                                    handleReject(
+                                    rejectClaim(
                                         claim._id
                                     )
                                 }
@@ -258,6 +258,12 @@ function ClaimRequests(){
                 </div>
             ))
         )}
+        <div>
+            <button className="Home-button"
+            onClick={()=>navigate("/restaurant-dashboard")}>
+                Home
+            </button>
+        </div>
     </div>
 );
 }
