@@ -6,3 +6,6 @@ client/dist/
 server/.env
 
 .DS_Store
+
+package-lock.json
+package.json
