@@ -104,7 +104,10 @@ const getNGOClaims = async (req, res) => {
             .populate({
                 path: "donationId",
                 populate: {
-                    path: "restaurantId"
+                    path: "restaurantId",
+                    populate:{
+                        path:"userId"
+                    }
                 }
             });
         res.status(200).json({

@@ -152,21 +152,18 @@ function MyClaims() {
                                 }
                             </p>
                             <p>
-                                <strong>Restaurant Contact:</strong>{" "}
+                                <strong>Restaurant Contact Person:</strong>{" "}
                                 {
                                     claim.donationId
                                         ?.restaurantId
-                                        ?.contactPerson
-                                        ?.name || "Not Available"
+                                        ?.userId
+                                        ?.name
                                 }
                             </p>
                             <p>
                                 <strong>Phone:</strong>{" "}
                                 {
-                                    claim.donationId
-                                        ?.restaurantId
-                                        ?.contactPerson
-                                        ?.phone || "Not Available"
+                                    claim.donationId.restaurantId?.userId?.phone
                                 }
                             </p>
                         </>

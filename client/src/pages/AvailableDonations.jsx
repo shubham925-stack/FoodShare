@@ -5,12 +5,17 @@ import "../styles/AvailableDonations.css"
 function AvailableDonations(){
     const navigate = useNavigate();
     const [donations, setDonations] = useState([]);
-
-    const fetchDonation = async()=>{
+    const [foodName, setFoodName] = useState("");
+    const [foodType, setFoodType] = useState("");
+    const [city, setCity] = useState("")
+    const fetchDonation = async(filters={})=>{
         try{
             const response = await axios.get(
-                "http://localhost:3000/api/food-donations"
-            )
+                "http://localhost:3000/api/food-donations",
+                {
+                    params: filters
+                }
+            );
             const AvailableDonations=response.data.donations.filter(
                 (donation)=>
                     donation.donationStatus!=="Fully Claimed"
@@ -31,6 +36,61 @@ function AvailableDonations(){
     return (
         <div className="donations-container">
             <h1>Available Donations</h1>
+            <div className="filter-container">
+                <input
+                    type="text"
+                    placeholder="Search Food"
+                    value={foodName}
+                    onChange={(e) => setFoodName(e.target.value)}
+                />
+
+                <select
+                    value={foodType}
+                    onChange={(e) => setFoodType(e.target.value)}
+                >
+                    <option value="">All Food Types</option>
+                    <option value="Veg">Veg</option>
+                    <option value="Non-Veg">Non-Veg</option>
+                    <option value="Vegan">Vegan</option>
+                    <option value="Jain">Jain</option>
+                </select>
+
+                <input
+                    type="text"
+                    placeholder="Enter City"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                />
+
+            </div>
+            <div className="filter-buttons">
+
+                <button
+                    className="filter-btn"
+                    onClick={() =>
+                        fetchDonation({
+                            ...(foodName.trim() && { foodName }),
+                            ...(foodType && { foodType }),
+                            ...(city.trim() && { city }),
+                        })
+                    }
+                >
+                    Apply Filters
+                </button>
+
+                <button
+                    className="clear-btn"
+                    onClick={() => {
+                        setFoodName("");
+                        setFoodType("");
+                        setCity("");
+                        fetchDonation();
+                    }}
+                >
+                    Clear Filters
+                </button>
+
+            </div>
             {donations.length === 0 ? (
                 <p>No donations available.</p>
             ) : (
@@ -48,6 +108,9 @@ function AvailableDonations(){
                         {donation.foodItems.map((item) => (
                                 <div className="food-item" key={item._id}>
                                     <h3>{item.foodName}</h3>
+                                    <img src={item.foodImage.imageUrl
+                                    } alt={item.foodName}
+                                    className="food-image" />
                                     <p><strong>Category:</strong> {item.category}</p>
                                     <p><strong>Food Type:</strong> {item.foodType}</p>
                                     <p>

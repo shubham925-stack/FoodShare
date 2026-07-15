@@ -278,7 +278,7 @@ function CreateDonation() {
                 >
                     {generatingDescription
                         ? "Generating..."
-                        : "🤖 Generate Description"}
+                        : "Generate Description"}
                 </button>
                     </div>
 

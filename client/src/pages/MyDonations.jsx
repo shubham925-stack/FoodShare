@@ -108,6 +108,9 @@ function MyDonations() {
                                             <strong>Description:</strong>{" "}
                                             {item.description}
                                         </p>
+                                        <img src={item.foodImage?.imageUrl} 
+                                             alt={item.foodName}
+                                             className="food-image" />
                                     </div>
                                 ))
                             }
