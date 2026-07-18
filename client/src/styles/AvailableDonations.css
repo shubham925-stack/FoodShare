@@ -1,3 +1,11 @@
+*{
+
+    transition:
+        background .3s,
+        color .3s,
+        transform .3s;
+}
+
 .donations-container {
     max-width: 1200px;
     margin: 40px auto;
