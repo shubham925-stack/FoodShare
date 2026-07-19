@@ -1,0 +1,127 @@
+.mission{
+    min-height:100vh;
+    padding:100px 8%;
+    background:#f8fff8;
+    display:flex;
+    align-items:center;
+}
+
+.mission-container{
+    width:100%;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:80px;
+    align-items:center;
+}
+
+/* Left Section */
+
+.mission-tag{
+    display:inline-block;
+    padding:8px 18px;
+    background:#E8F5E9;
+    color:#2E7D32;
+    border-radius:25px;
+    font-size:14px;
+    font-weight:600;
+    margin-bottom:20px;
+}
+
+.mission-content h2{
+    font-size:48px;
+    color:#2E7D32;
+    margin-bottom:25px;
+    line-height:1.2;
+}
+
+.mission-content p{
+    font-size:18px;
+    color:#666;
+    line-height:1.8;
+    margin-bottom:35px;
+}
+
+.mission-btn{
+    display:inline-block;
+    text-decoration:none;
+    background:#2E7D32;
+    color:white;
+    padding:16px 36px;
+    border-radius:35px;
+    font-size:17px;
+    font-weight:600;
+    transition:.3s ease;
+}
+
+.mission-btn:hover{
+    background:#388E3C;
+    transform:translateY(-4px);
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+}
+
+/* Right Section */
+
+.mission-cards{
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+}
+
+.mission-card{
+    background:white;
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    transition:.35s ease;
+}
+
+.mission-card:hover{
+    transform:translateX(10px);
+    box-shadow:0 18px 40px rgba(0,0,0,.15);
+}
+
+.mission-icon{
+    font-size:45px;
+    margin-bottom:18px;
+}
+
+.mission-card h3{
+    color:#2E7D32;
+    font-size:24px;
+    margin-bottom:12px;
+}
+
+.mission-card p{
+    color:#666;
+    line-height:1.7;
+    font-size:16px;
+}
+
+@media(max-width:900px){
+
+    .mission{
+        padding:80px 6%;
+    }
+
+    .mission-container{
+        grid-template-columns:1fr;
+        gap:50px;
+    }
+
+    .mission-content{
+        text-align:center;
+    }
+
+    .mission-content h2{
+        font-size:38px;
+    }
+
+    .mission-content p{
+        font-size:16px;
+    }
+
+    .mission-card:hover{
+        transform:translateY(-8px);
+    }
+
+}

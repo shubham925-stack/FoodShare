@@ -14,11 +14,13 @@ import ClaimDonation from "./pages/ClaimDonation";
 import MyClaims from "./pages/MyClaims";
 import UpdateNGOProfile from "./pages/UpdateNGOProfile";
 import ClaimRequests from "./pages/ClaimRequests"
+import LandingPage from "./pages/LandingPage";
 function App() {
   return (
     <Routes>
-    <Route path="/" element={<Register />} />
+    <Route path="/register" element={<Register />} />
     <Route path="/login" element={<Login />} />
+    <Route path="/" element={<LandingPage/>} />
     <Route
         path="/restaurant-dashboard"
         element={<RestaurantDashboard />}
