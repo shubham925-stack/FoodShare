@@ -171,12 +171,12 @@ function MyClaims() {
                     {claim.claimStatus === "Picked Up" && (
                         <>
                             <hr />
-                            <p>
+                            {/* <p>
                                 <strong>Picked Up On:</strong>{" "}
                                 {new Date(
                                     claim.pickedUpAt
                                 ).toLocaleString()}
-                            </p>
+                            </p> */}
                         </>
                     )}
                 </div>

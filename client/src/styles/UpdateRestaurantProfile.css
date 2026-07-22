@@ -1,0 +1,143 @@
+.profile-container{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px;
+    background:linear-gradient(
+        135deg,
+        #eef8ef,
+        #d7f5df,
+        #f5fff6
+    );
+    position:relative;
+    overflow:hidden;
+}
+
+.profile-container::before{
+    content:"";
+    position:absolute;
+    width:350px;
+    height:350px;
+    background:#4CAF50;
+    border-radius:50%;
+    top:-120px;
+    left:-120px;
+    filter:blur(120px);
+    opacity:.25;
+}
+
+.profile-container::after{
+    content:"";
+    position:absolute;
+    width:300px;
+    height:300px;
+    background:#81C784;
+    border-radius:50%;
+    bottom:-100px;
+    right:-100px;
+    filter:blur(120px);
+    opacity:.25;
+}
+
+.profile-card{
+    width:100%;
+    max-width:750px;
+    background:rgba(255,255,255,.75);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,.4);
+    border-radius:22px;
+    padding:40px;
+    box-shadow:0 20px 45px rgba(0,0,0,.12);
+    position:relative;
+    z-index:2;
+}
+
+.profile-card h1{
+    text-align:center;
+    color:#2E7D32;
+    margin-bottom:30px;
+}
+
+.profile-card input,
+.profile-card select{
+    width:100%;
+    padding:14px 16px;
+    margin-bottom:18px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    font-size:15px;
+    outline:none;
+    box-sizing:border-box;
+    transition:.3s;
+}
+
+.profile-card input:focus,
+.profile-card select:focus{
+    border-color:#43A047;
+    box-shadow:0 0 0 3px rgba(67,160,71,.15);
+}
+
+.type-section,
+.file-section,
+.donation-section{
+    margin:28px 0;
+}
+
+.type-section p,
+.file-section p,
+.donation-section p{
+    font-weight:600;
+    color:#388E3C;
+    margin-bottom:12px;
+}
+
+.type-section label,
+.donation-section label{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:10px;
+    cursor:pointer;
+}
+
+.type-section input[type="radio"],
+.donation-section input[type="radio"]{
+    accent-color:#43A047;
+    transform:scale(1.15);
+}
+
+.save-btn{
+    width:100%;
+    padding:16px;
+    border:none;
+    border-radius:12px;
+    background:#43A047;
+    color:white;
+    font-size:17px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.save-btn:hover{
+    background:#2E7D32;
+    transform:translateY(-2px);
+}
+
+@media(max-width:768px){
+
+    .profile-container{
+        padding:20px;
+    }
+
+    .profile-card{
+        padding:25px;
+    }
+
+    .profile-card h1{
+        font-size:28px;
+    }
+
+}

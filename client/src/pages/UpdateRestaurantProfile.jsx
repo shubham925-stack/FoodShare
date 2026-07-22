@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios"
-import "../styles/RestaurantProfile.css"
+import "../styles/UpdateRestaurantProfile.css"
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 // import verificationDocumentSchema from "../../../server/models/schemas/VerificationDocument";

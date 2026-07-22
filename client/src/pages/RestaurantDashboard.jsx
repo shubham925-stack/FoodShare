@@ -4,6 +4,11 @@ import { useNavigate } from "react-router-dom";
 function RestaurantDashboard() {
     const user = JSON.parse(localStorage.getItem("user"));
     const navigate = useNavigate()
+    const handleLogout=()=>{
+        localStorage.removeItem("token");
+        localStorage.removeItem("user")
+        navigate("/login")
+    }
     return (
         <div className="dashboard-container">
             <div className="dashboard-header">
@@ -55,19 +60,19 @@ function RestaurantDashboard() {
                     className="dashboard-card"
                     onClick={() => navigate("/claim-requests")}
                 >
-                    <h2>📩 Claim Requests</h2>
+                    <h2>Claim Requests</h2>
                     <p>Review NGO requests</p>
                 </div>
-                <Link
-                    to="/login"
+                <div
                     className="dashboard-card logout-card"
+                    onClick={handleLogout}
                 >
                     <h2>🚪</h2>
                     <h3>Logout</h3>
                     <p>
                         Sign out
                     </p>
-                </Link>
+                </div>
             </div>
         </div>
     );

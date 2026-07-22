@@ -2,9 +2,10 @@ import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/Login.css"
-
+import useAuth from "../hooks/useAuth"; //change
 
 function Login() {
+    const {login} = useAuth() //change
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
@@ -17,8 +18,7 @@ function Login() {
                     password
                 }
             )
-            localStorage.setItem("token", response.data.token)
-            localStorage.setItem("user", JSON.stringify(response.data.user))
+            login(response.data.user, response.data.token); //change
             const token = response.data.token
             const user = response.data.user
             console.log("Saved token:", localStorage.getItem("token"))
@@ -78,33 +78,57 @@ function Login() {
         }
     }
     return (
-        <div className="login-container">
-            <div className="login-card">
-                <h1>Food Share</h1>
-                <h2>Login</h2>
-
-                <input
-                    type="email"
-                    placeholder="Enter Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)
-                    } />
-
-                <input
-                    type="password"
-                    placeholder="Enter Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)
-                    } />
-                <button onClick={handleLogin}>
-                    Login
-                </button>
-                <p className="register-text">
-                    Don't have an account?{" "}
-                    <Link to="/">
-                        Register
-                    </Link>
-                </p>
+        <div className="login-page">
+            <div className="login-wrapper">
+                <Link to ="/" className="home-button">
+                     Home
+                </Link>
+                <div className="login-left">
+                    <img src="/logo.png" alt="FoodShare Logo" className="login-logo"/>
+                    <h1>FoodShare</h1>
+                    <p className="tagline">
+                        Connecting surplus food with people who need it.
+                    </p>
+                    <div className="feature-list">
+                        <div className="feature-item">
+                            Donate surplus food
+                        </div>
+                        <div className="feature-item">
+                            Reduce hunger
+                        </div>
+                        <div className="feature-item">
+                            Reduce food waste
+                        </div>
+                        <div className="feature-item">
+                            Connect Restaurants and NGOs
+                        </div>
+                    </div>
+                </div>
+                <div className="login-card">
+                    <h2>Welcome back</h2>
+                    <p className="login-subtitle">
+                        Sign in to continue your FoodShare journey
+                    </p>
+                    <input type="email"
+                           placeholder="enter email"
+                           value={email}
+                           onChange={(e)=>setEmail(e.target.value)}
+                    />
+                    <input type="password"
+                           placeholder="enter password"
+                           value={password}
+                           onChange={(e)=>setPassword(e.target.value)}
+                    />
+                    <button onClick={handleLogin}>
+                        Sign In
+                    </button>
+                    <p className="register-text">
+                        Don't have and account?{" "}
+                        <Link to="/register">
+                            Register
+                        </Link>
+                    </p>
+                </div>
             </div>
         </div>
     )

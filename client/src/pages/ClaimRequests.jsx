@@ -245,14 +245,14 @@ function ClaimRequests(){
                                 ✅ Donation Collected
                             </h3>
 
-                            <p>
+                            {/* <p>
                                 <strong>
                                     Picked Up On:
                                 </strong>{" "}
                                 {new Date(
                                     claim.pickedUpAt
                                 ).toLocaleString()}
-                            </p>
+                            </p> */}
                         </div>
                     )}
                 </div>

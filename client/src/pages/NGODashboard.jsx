@@ -1,10 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import "../styles/RestaurantDashboard.css";
 
 function NGODashboard() {
-
+    const navigate = useNavigate();
     const user = JSON.parse(localStorage.getItem("user"));
+    const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
 
+    navigate("/login");
+    };
     return (
         <div className="dashboard-container">
             <div className="dashboard-header">
@@ -46,14 +51,14 @@ function NGODashboard() {
                     <h3>Edit Profile</h3>
                     <p>Update NGO details</p>
                 </Link>
-                <Link
-                    to="/login"
-                    className="dashboard-card logout-card"
+                <div
+                   className="dashboard-card logout-card"
+                   onClick={handleLogout}
                 >
                     <h2>🚪</h2>
                     <h3>Logout</h3>
                     <p>Sign out</p>
-                </Link>
+                </div>
             </div>
         </div>
     );
