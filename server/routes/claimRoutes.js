@@ -3,7 +3,7 @@ const router = express.Router();
 
 const authMiddleware = require("../middleware/authMiddleware");
 const roleMiddleware = require("../middleware/roleMiddleware");
-
+const { claimLimiter } = require("../middleware/rateLimitMiddleware");
 const {
     createClaim,
     getRestaurantClaims,
@@ -16,6 +16,7 @@ router.post(
     "/:id",
     authMiddleware,
     roleMiddleware("NGO"),
+    claimLimiter,
     createClaim
 );
 router.get(

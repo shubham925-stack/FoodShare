@@ -11,6 +11,8 @@ const adminRoutes=require("./routes/adminRoutes")
 const aiRoutes = require("./routes/aiRoutes")
 const claimRoutes = require("./routes/claimRoutes");
 const uploadRoutes = require("./routes/uploadRoutes")
+const { globalLimiter } = require("./middleware/rateLimitMiddleware");
+
 // const volunteerProfileRoutes=require("./routes/volunteerProfileRoutes")
 
 
@@ -18,6 +20,7 @@ connectDB()
 const app = express();
 app.use(cors())
 app.use(express.json())
+app.use(globalLimiter);
 app.use("/api/auth",authRoutes)
 app.use("/api/restaurant",restaurantRoutes)
 app.use("/api/food-donations",foodDonationRoutes)
