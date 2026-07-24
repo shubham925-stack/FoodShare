@@ -150,6 +150,13 @@ function MyClaims() {
                                         ?.address
                                         ?.city
                                 }
+                                ,{" "}
+                                {
+                                    claim.donationId
+                                    ?.restaurantId
+                                    ?.address
+                                    ?.state
+                                }
                             </p>
                             <p>
                                 <strong>Restaurant Contact Person:</strong>{" "}
@@ -166,17 +173,6 @@ function MyClaims() {
                                     claim.donationId.restaurantId?.userId?.phone
                                 }
                             </p>
-                        </>
-                    )}
-                    {claim.claimStatus === "Picked Up" && (
-                        <>
-                            <hr />
-                            {/* <p>
-                                <strong>Picked Up On:</strong>{" "}
-                                {new Date(
-                                    claim.pickedUpAt
-                                ).toLocaleString()}
-                            </p> */}
                         </>
                     )}
                 </div>

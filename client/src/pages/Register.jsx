@@ -72,7 +72,7 @@ return (
             <div className="register-card">
                 <h2>Create Account </h2>
                 <p className="register-subtitle">
-                    Join oodShare and help reduce food waste.
+                    Join FoodShare and help reduce food waste.
                 </p>
                 <input
                     type="text"
